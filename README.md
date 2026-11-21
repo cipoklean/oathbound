@@ -80,14 +80,18 @@ BSC_RPC_URL=https://bsc.publicnode.com forge test --match-path "test/fork/*" -vv
 
 ## Deployment
 
-```bash
-# testnet first
-forge script script/Deploy.s.sol --rpc-url bsc_testnet --broadcast \
-    --account <keystore> --verify --verifier-url https://api-testnet.bscscan.com/api
+The real Agent ID registry exists on **BSC mainnet only**, so testnet
+deploys a `MockAgentID` (open `mint`) as the gate stand-in.
 
-# mainnet
+```bash
+# testnet (chain 97): deploys MockAgentID + PromiseBond + AgentReputation
+forge script script/DeployTestnet.s.sol --rpc-url bsc_testnet --broadcast \
+    --keystore keystore --password-file keystore/password.txt
+
+# mainnet (chain 56): gates on the real registry
 forge script script/Deploy.s.sol --rpc-url bsc --broadcast \
-    --account <keystore> --verify --etherscan-api-key $BSCSCAN_API_KEY
+    --keystore keystore --password-file keystore/password.txt \
+    --verify --etherscan-api-key $BSCSCAN_API_KEY
 ```
 
 `PromiseBond` deploys `AgentReputation` internally; verify both addresses

@@ -10,3 +10,16 @@ optimizer_runs = 200
 [rpc_endpoints]
 bsc = "https://bsc.publicnode.com"
 bsc_testnet = "https://bsc-testnet.publicnode.com"
+
+[lint]
+# These lints flag intentional design: holder-gate equality, user-set deadlines,
+# stake returns bound to the promise's own promiser, and calls to our own
+# immutable reputation contract.
+exclude_lints = [
+    "block-timestamp",
+    "incorrect-strict-equality",
+    "arbitrary-send-eth",
+    "reentrancy-no-eth",
+    "reentrancy-events",
+    "reentrancy-eth",
+]

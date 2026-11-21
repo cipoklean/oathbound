@@ -113,9 +113,21 @@ Ship the ABI so the site can render live promises and scores.
 - **Weeks 2–3 (→ Dec 9):** drive ≥30 real Agent ID holders to interact.
   Outreach, live demos, dogfooding — no sybil activity.
 
+## Deployment status
+
+- [x] Contracts written + unit-tested (mock registry)
+- [x] Fork tests pass against live BSC mainnet registry + real Agent ID holders
+- [ ] **BSC testnet deploy** — throwaway deployer generated
+  (`keystore/throwaway-testnet`, address
+  `0xb999CFcD4CE07976Eb8B4e2f29045A60dcCB44D7`, awaiting faucet tBNB).
+  Note: real registry is mainnet-only → testnet uses `MockAgentID`
+  (open mint) via `script/DeployTestnet.s.sol`.
+- [ ] Mainnet deploy + BscScan verify — commands in README; **do not run
+  until user funds a fresh mainnet deployer and says go.**
+
 ## Repo rules
 
-- Repo: **`cipoklean/oathbound`** — created by the user (link pending).
+- Repo: **`cipoklean/oathbound`** — pushed to `main`.
 - All commits authored **and** committed as:
   - `user.name`: `cipoklean`
   - `user.email`: `82593998+cipoklean@users.noreply.github.com`
