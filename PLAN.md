@@ -117,11 +117,13 @@ Ship the ABI so the site can render live promises and scores.
 
 - [x] Contracts written + unit-tested (mock registry)
 - [x] Fork tests pass against live BSC mainnet registry + real Agent ID holders
-- [ ] **BSC testnet deploy** — throwaway deployer generated
-  (`keystore/throwaway-testnet`, address
-  `0xb999CFcD4CE07976Eb8B4e2f29045A60dcCB44D7`, awaiting faucet tBNB).
-  Note: real registry is mainnet-only → testnet uses `MockAgentID`
-  (open mint) via `script/DeployTestnet.s.sol`.
+- [x] **BSC testnet deploy** — done, smoke-tested end to end
+  (mint → declare bonded promise → attest → `scoreOf = (1,0,1,10000)`):
+  - MockAgentID `0x50dB8293aAbB6058882d3f3410BC76Ff44306a76`
+  - PromiseBond `0xBE023BD129711301732Bb94A15F09b71A93ac27C`
+  - AgentReputation `0x9A22577ce6C24bb0f8dD1aBB41A789E0411900aa`
+  - Sourcify: all three `exact_match`. BscScan: needs web form (paid API) —
+    std-JSON inputs + settings + constructor args in `verification/`.
 - [ ] Mainnet deploy + BscScan verify — commands in README; **do not run
   until user funds a fresh mainnet deployer and says go.**
 

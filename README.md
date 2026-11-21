@@ -86,17 +86,24 @@ deploys a `MockAgentID` (open `mint`) as the gate stand-in.
 ```bash
 # testnet (chain 97): deploys MockAgentID + PromiseBond + AgentReputation
 forge script script/DeployTestnet.s.sol --rpc-url bsc_testnet --broadcast \
-    --keystore keystore --password-file keystore/password.txt
+    --keystore keystore/<file> --password-file keystore/password.txt \
+    --gas-price 300000000
 
-# mainnet (chain 56): gates on the real registry
+# mainnet (chain 56): gates on the real registry — unverified on deploy,
+# then verify via the routes in verification/README.md
 forge script script/Deploy.s.sol --rpc-url bsc --broadcast \
-    --keystore keystore --password-file keystore/password.txt \
-    --verify --etherscan-api-key $BSCSCAN_API_KEY
+    --keystore keystore/<file> --password-file keystore/password.txt \
+    --gas-price 300000000
 ```
 
-`PromiseBond` deploys `AgentReputation` internally; verify both addresses
-(the script logs both). Constructor arg for PromiseBond is the registry
-address `0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F`.
+`PromiseBond` deploys `AgentReputation` internally; verify all deployed
+addresses (the script logs all three). Constructor arg for PromiseBond is
+the registry address `0x60B9262456dE011F7d15a54CdD8c48bAaa8B022F`.
+
+**Verification:** BscScan's API is paid-tier for BSC, so the guaranteed path
+is the **Verify & Publish** web form using the standard-JSON inputs in
+`verification/` (compiler settings + constructor args are documented there).
+`--verifier sourcify` also works for free but does not feed BscScan.
 
 ## For the website
 
