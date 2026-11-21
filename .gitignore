@@ -1,0 +1,14 @@
+# Foundry artifacts
+out/
+cache/
+broadcast/
+
+# Secrets — never commit keys or env files
+.env
+*.key
+keystore/
+
+# OS / editor noise
+.DS_Store
+.vscode/
+node_modules/
